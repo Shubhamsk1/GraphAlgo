@@ -59,6 +59,7 @@ vector<int> bfsOfGraph(int n, vector<int> adj[]){
         if(!vis[i]){
             queue<int> q;
             q.push(i);
+            vis[i]=1;
             while(!q.empty()){
                 int node=q.front();
                 q.pop();
