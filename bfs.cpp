@@ -24,8 +24,7 @@ void solve();
 
 
 /*Declare Global variables here*/
-
-
+vector<int> bfs;
 
 /* Main function starts from here */
 int32_t main() { 
@@ -51,26 +50,30 @@ cerr<<"time taken : "<<(float)clock()/CLOCKS_PER_SEC*1000<<" ms"<<endl;
 
 return 0;
 } 
+
 /*Main function Ends */
-vector<int> bfsOfGraph(int n, vector<int> adj[]){
-    vector<int> bfs;
-    vector<int> vis(n+1,0);
-    for(int i=1;i<=n;i++){
+void bfsOfGraph(int n, vector<int> adj[]){
+    vector<int> vis(n,0);
+   
+    for(int i=0;i<n;i++){
         if(!vis[i]){
             queue<int> q;
             q.push(i);
+            vis[i]=1;
             while(!q.empty()){
                 int node=q.front();
                 q.pop();
-                bfs.push_back(n);
-                for(auto it:adj[node]){
-                    q.push(it);
-                    vis[it]=1;
+                bfs.push_back(node);
+                for(auto it:adj[node])
+                {
+                    if(!vis[it]){
+                        q.push(it);
+                        vis[it]=1;
+                    }
                 }
             }
         }
     }
-    return bfs;
 }
 
 
@@ -78,16 +81,16 @@ vector<int> bfsOfGraph(int n, vector<int> adj[]){
 void solve() { 
     int n,m;
     cin>>n>>m;
-    vector<int> adj[n+1];
+    vector<int> adj[n];
     for(int i=1;i<=m;i++){
         int x,y;
         cin>>x>>y;
-        adj[x].push_back(y);
-        adj[y].push_back(x);
+        adj[x-1].push_back(y-1);
+        adj[y-1].push_back(x-1);
     }
-    vector<int> bfs=bfsOfGraph(n,adj);
+    bfsOfGraph(n,adj);
     for(auto i:bfs){
-        cout<<i<<" ";
+        cout<<i+1<<" ";
     }
 
 }
