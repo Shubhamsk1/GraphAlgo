@@ -52,11 +52,6 @@ cerr<<"time taken : "<<(float)clock()/CLOCKS_PER_SEC*1000<<" ms"<<endl;
 return 0;
 } 
 /*Main function Ends */
-bool allvisted(vector<int> visited){
-    for(auto i:visited)
-        if(i==0) return false;
-    return true;
-}
 void dfsOfGraph(int node,vector<int> adj[],vector<int>&dfs,vector<int>&vis){
     dfs.push_back(node+1);
     vis[node]=1;
@@ -87,4 +82,5 @@ void solve() {
     }
     for(auto i:dfs)
         cout<<i<<" ";
+
 }
